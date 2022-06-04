@@ -1,0 +1,4 @@
+id;city_name;country;metro_availability;population
+1;Новосибирск;Россия;true;1000000
+2;Томск;Россия;false;800000
+3;Кемерово;Россия;false;600000

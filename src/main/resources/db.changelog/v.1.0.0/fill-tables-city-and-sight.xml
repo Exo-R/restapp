@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet author="exor" id="loadData-table-city">
+        <loadData catalogName="postgres"
+                  commentLineStartsWith="//"
+                  encoding="UTF-8"
+                  file="data/city.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator=";"
+                  tableName="city"
+                  usePreparedStatements="true">
+            <column header="id" name="id" type="NUMERIC"/>
+            <column header="city_name" name="city_name" type="varchar(255)"/>
+            <column header="country" name="country" type="varchar(255)"/>
+            <column header="metro_availability" name="metro_availability" type="boolean"/>
+            <column header="population" name="population" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+
+
+    <changeSet author="exor" id="loadData-table-sight">
+        <loadData catalogName="postgres"
+                  commentLineStartsWith="//"
+                  encoding="UTF-8"
+                  file="data/sight.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator=";"
+                  tableName="sight"
+                  usePreparedStatements="true">
+            <column header="id"  name="id" type="NUMERIC" />
+            <column header="date_construction"  name="date_construction" type="date"/>
+            <column header="short_description"  name="short_description" type="varchar(255)"/>
+            <column header="sight_name"  name="sight_name" type="varchar(255)"/>
+            <column header="type_sight"  name="type_sight" type="varchar(255)"/>
+            <column header="city_id"  name="city_id" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+
+
+</databaseChangeLog>
