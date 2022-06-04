@@ -7,7 +7,7 @@ import ru.java.restapp.dto.CityDto;
 import ru.java.restapp.service.CityService;
 import javax.ws.rs.core.Response;
 
-@RestController("city")
+@RestController
 @Log
 @RequestMapping("/city")
 @AllArgsConstructor
