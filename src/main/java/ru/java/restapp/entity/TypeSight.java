@@ -2,6 +2,7 @@ package ru.java.restapp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ru.java.restapp.exception.ValidationException;
 
 @Getter
 @AllArgsConstructor
@@ -13,18 +14,17 @@ public enum TypeSight {
     MONUMENT("MONUMENT", 4),
     RESERVE("RESERVE", 5);
 
-    private final String code;
-    private final int value;
+    private final String value;
+    private final int code;
 
-    public static TypeSight fromValue(String par) throws Exception {
+    public static TypeSight fromValue(String param) throws ValidationException {
 
             TypeSight[] values = TypeSight.values();
             for(TypeSight value: values){
-
-                if(value.getCode().equals(par)){
+                if(value.getValue().equals(param)){
                     return value;
                 }
             }
-            throw new Exception("TypeSight not found");
+            throw new ValidationException("TypeSight not found");
     }
 }

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.java.restapp.dto.CityDto;
 import ru.java.restapp.entity.City;
-import ru.java.restapp.mapstruct.MapStructMapperImpl;
+import ru.java.restapp.mapper.Mapper;
 import ru.java.restapp.repository.CityRepository;
 import java.util.Objects;
 import java.util.Optional;
@@ -14,11 +14,11 @@ import java.util.Optional;
 public class CityService {
 
     private final CityRepository cityRepository;
-    private final MapStructMapperImpl mapStructMapper;
+    private final Mapper mapper;
 
     public void saveCity(CityDto cityDto){
         if(validateCityDto(cityDto)) {
-            cityRepository.save(mapStructMapper.cityDtoToCity(cityDto));
+            cityRepository.save(mapper.cityDtoToCity(cityDto));
         }
     }
 
@@ -41,11 +41,7 @@ public class CityService {
     public Optional<CityDto> findById(Long id){
 
         Optional<City> foundCity = cityRepository.findById(id);
-
-        if(foundCity.isPresent()){
-            return Optional.of(mapStructMapper.cityToCityDto(foundCity.get()));
-        }
-        return Optional.empty();
+        return foundCity.map(mapper::cityToCityDto);
     }
 
     public void updateCity(CityDto cityDto, Long cityId) {

@@ -7,7 +7,7 @@ import ru.java.restapp.dto.SightDto;
 import ru.java.restapp.entity.City;
 import ru.java.restapp.entity.Sight;
 import ru.java.restapp.entity.TypeSight;
-import ru.java.restapp.mapstruct.MapStructMapperImpl;
+import ru.java.restapp.mapper.Mapper;
 import ru.java.restapp.repository.SightRepository;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,13 +20,13 @@ import java.util.stream.Stream;
 public class SightService {
 
     private final SightRepository sightRepository;
-    private final MapStructMapperImpl mapStructMapper;
+    private final Mapper mapper;
     private final CityService cityService;
 
-    public List<SightDto> findAllByCityId(Long cityId) {// +
+    public List<SightDto> findAllByCityId(Long cityId) {
         return sightRepository.findAllByCity_Id(cityId)
                 .stream()
-                .map(mapStructMapper::sightToSightDto)
+                .map(mapper::sightToSightDto)
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +40,7 @@ public class SightService {
                 listSights = sightRepository.findAllByTypeSight(TypeSight.fromValue(typeSight.toUpperCase()));
             }
 
-            Stream<SightDto> sightDto = listSights.stream().map(mapStructMapper::sightToSightDto);
+            Stream<SightDto> sightDto = listSights.stream().map(mapper::sightToSightDto);
 
             if (needSort) {
                 sightDto = sightDto.sorted(Comparator.comparing(SightDto::getSightName));
@@ -63,9 +63,9 @@ public class SightService {
         }
 
         if (foundCityDto != null && validateSightDto(sightDto)) {
-            City foundCity = mapStructMapper.cityDtoToCity(foundCityDto);
+            City foundCity = mapper.cityDtoToCity(foundCityDto);
             sightDto.setCity(foundCity);
-            sightRepository.save(mapStructMapper.sightDtoToSight(sightDto));
+            sightRepository.save(mapper.sightDtoToSight(sightDto));
         }
     }
 

@@ -1,4 +1,4 @@
-package ru.java.restapp.mapstruct;
+package ru.java.restapp.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.java.restapp.dto.CityDto;
@@ -7,7 +7,7 @@ import ru.java.restapp.entity.City;
 import ru.java.restapp.entity.Sight;
 
 @Component
-public class MapStructMapperImpl implements MapStructMapper{
+public class MapperImpl implements Mapper {
 
     @Override
     public CityDto cityToCityDto(City city) {
@@ -15,7 +15,6 @@ public class MapStructMapperImpl implements MapStructMapper{
         if(city == null){
             return null;
         }
-
         return CityDto.builder()
                 .id(city.getId())
                 .cityName(city.getCityName())
@@ -31,7 +30,6 @@ public class MapStructMapperImpl implements MapStructMapper{
         if(cityDto == null){
             return null;
         }
-
         City city = new City();
         city.setId(cityDto.getId());
         city.setCityName(cityDto.getCityName());
@@ -47,7 +45,6 @@ public class MapStructMapperImpl implements MapStructMapper{
         if(sight == null){
             return null;
         }
-
         return SightDto.builder()
                 .id(sight.getId())
                 .sightName(sight.getSightName())
@@ -64,7 +61,6 @@ public class MapStructMapperImpl implements MapStructMapper{
         if(sightDto == null){
             return null;
         }
-
         Sight sight = new Sight();
         sight.setId(sightDto.getId());
         sight.setSightName(sightDto.getSightName());
